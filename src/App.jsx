@@ -8,7 +8,7 @@ import './App.css';
 export default function App() {
   const [employees, setEmployees] = useLocalStorage('ati-employees', []);
   const [records, setRecords] = useLocalStorage('ati-records', []);
-  const [view, setView] = useState('records');
+  const [view, setView] = useState('new');
   const [editRecord, setEditRecord] = useState(null);
   const [showEmployeeManager, setShowEmployeeManager] = useState(false);
   const [theme, setTheme] = useLocalStorage('ati-theme', 'dark');
@@ -88,7 +88,7 @@ export default function App() {
             </div>
             {employees.length === 0 && (
               <div className="onboarding-hint">
-                Start by adding employees — click <strong>Employees (0)</strong> in the top bar.
+                Click <strong>Employees</strong> to add a new employee.
               </div>
             )}
             <RecordsList
