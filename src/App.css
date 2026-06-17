@@ -830,4 +830,58 @@ body {
 
   /* Theme toggle stays in the top bar, top-right next to the logo */
   .header-actions { gap: 0; }
+  .theme-toggle { width: 40px; height: 40px; }
+
+  /* ─── Phase 3: stack dense layouts ─── */
+
+  /* Form rows go single-column, every field full-width */
+  .form-row { flex-direction: column; gap: 14px; }
+  .field { min-width: 0; }
+  .field-sm { max-width: none; }
+
+  /* One checkbox per row, roomier tap area */
+  .checkbox-group { grid-template-columns: 1fr; gap: 6px; padding: 14px; }
+  .checkbox-item { padding: 8px 0; min-height: 44px; }
+
+  /* Records toolbar stacks: search → filter → exports */
+  .records-toolbar { flex-direction: column; }
+  .records-toolbar select { width: 100%; }
+  .export-bar { margin-left: 0; }
+  .export-bar .btn-sm { flex: 1; }
+
+  /* Record-card actions fill the row */
+  .record-actions .btn-sm { flex: 1; }
+
+  /* Template-picker tabs scroll instead of overflowing the header */
+  .tp-header { gap: 4px; }
+  .tp-tabs { flex: 1; overflow-x: auto; }
+  .tp-tabs button { white-space: nowrap; padding: 11px 10px; font-size: .74rem; }
+
+  /* Modals become full-screen sheets with a sticky header */
+  .modal-overlay { padding: 0; }
+  .modal {
+    max-width: none;
+    min-height: 100vh;
+    min-height: 100dvh;
+    border: none;
+    border-radius: 0;
+  }
+  .modal-header {
+    position: sticky;
+    top: 0;
+    background: var(--bg-card);
+    z-index: 1;
+  }
+
+  /* Employee rows stack name / meta / actions */
+  .employee-row { flex-direction: column; align-items: stretch; gap: 8px; }
+  .emp-name { min-width: 0; }
+  .emp-meta { flex: none; }
+  .emp-actions { margin-left: 0; }
+  .emp-actions button { flex: 1; min-height: 44px; }
+
+  /* ─── Phase 4: comfortable touch targets ─── */
+  .btn-sm { padding: 10px 16px; }
+  .close-btn { min-width: 44px; min-height: 44px; }
+  .btn-template-toggle { padding: 9px 14px; }
 }
