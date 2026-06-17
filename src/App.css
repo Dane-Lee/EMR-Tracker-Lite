@@ -116,6 +116,8 @@ body {
 
 .header-nav { display: flex; gap: 8px; align-items: center; }
 
+.header-actions { display: flex; align-items: center; gap: 8px; }
+
 .header-nav button {
   background: none;
   border: 1px solid transparent;
@@ -771,4 +773,61 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .5px;
+}
+
+/* ═══════════════ Mobile (≤640px) ═══════════════ */
+@media (max-width: 640px) {
+  /* Phase 1 — tame the global 125% scale so content fits a phone.
+     106.25% keeps form inputs ≥16px, which stops iOS Safari from
+     auto-zooming when a field is focused. Adjust this number to taste. */
+  html { font-size: 106.25%; }
+
+  /* Belt-and-suspenders: pin form controls to 16px against iOS zoom */
+  .field input, .field select, .field textarea,
+  .search-input, .autocomplete input, .records-toolbar select {
+    font-size: 16px;
+  }
+
+  /* Reclaim horizontal space — the desktop 28px paddings are too wide */
+  .app-header { padding: 0 16px; }
+  .app-main { padding: 20px 14px 88px; } /* bottom room for the tab bar */
+  .form-header { padding: 16px 18px; }
+  .form-section { padding: 18px; }
+  .form-actions { padding: 18px; }
+  .modal-header,
+  .employee-form,
+  .upload-section { padding: 18px; }
+  .employee-list-section { padding: 14px 18px 22px; }
+
+  /* Phase 2 — the header nav becomes a fixed bottom tab bar */
+  .header-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--header-bg);
+    gap: 6px;
+    padding: 6px 10px;
+    padding-bottom: calc(6px + env(safe-area-inset-bottom)); /* iPhone home bar */
+    box-shadow: 0 -2px 10px rgba(0,0,0,.35);
+    z-index: 100;
+  }
+
+  .header-nav button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.15;
+    min-height: 48px; /* comfortable touch target */
+    padding: 8px 4px;
+    font-size: .78rem;
+    opacity: .85;
+  }
+
+  .header-nav button.nav-active { opacity: 1; }
+
+  /* Theme toggle stays in the top bar, top-right next to the logo */
+  .header-actions { gap: 0; }
 }

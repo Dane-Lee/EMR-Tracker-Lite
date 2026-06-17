@@ -46,26 +46,28 @@ export default function App() {
         <div className="header-brand">
           <img src="/ati-logo.png" alt="ATI Worksite Solutions" />
         </div>
-        <nav className="header-nav">
-          <button
-            className={view === 'records' && !editRecord ? 'nav-active' : ''}
-            onClick={() => { setView('records'); setEditRecord(null); }}
-          >
-            Records
-          </button>
-          <button
-            className={view === 'new' ? 'nav-active' : ''}
-            onClick={() => { setView('new'); setEditRecord(null); }}
-          >
-            + New Encounter
-          </button>
-          <button onClick={() => setShowEmployeeManager(true)}>
-            Employees ({employees.length})
-          </button>
+        <div className="header-actions">
+          <nav className="header-nav">
+            <button
+              className={view === 'records' && !editRecord ? 'nav-active' : ''}
+              onClick={() => { setView('records'); setEditRecord(null); }}
+            >
+              Records
+            </button>
+            <button
+              className={view === 'new' ? 'nav-active' : ''}
+              onClick={() => { setView('new'); setEditRecord(null); }}
+            >
+              + New Encounter
+            </button>
+            <button onClick={() => setShowEmployeeManager(true)}>
+              Employees ({employees.length})
+            </button>
+          </nav>
           <button className="theme-toggle" onClick={toggleTheme} title="Toggle theme">
             {theme === 'dark' ? '☀' : '☾'}
           </button>
-        </nav>
+        </div>
       </header>
 
       <main className="app-main">
