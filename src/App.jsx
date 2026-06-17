@@ -49,12 +49,6 @@ export default function App() {
         <div className="header-actions">
           <nav className="header-nav">
             <button
-              className={view === 'records' && !editRecord ? 'nav-active' : ''}
-              onClick={() => { setView('records'); setEditRecord(null); }}
-            >
-              Records
-            </button>
-            <button
               className={view === 'new' ? 'nav-active' : ''}
               onClick={() => { setView('new'); setEditRecord(null); }}
             >
@@ -62,6 +56,12 @@ export default function App() {
             </button>
             <button onClick={() => setShowEmployeeManager(true)}>
               Employees ({employees.length})
+            </button>
+            <button
+              className={view === 'records' && !editRecord ? 'nav-active' : ''}
+              onClick={() => { setView('records'); setEditRecord(null); }}
+            >
+              Records
             </button>
           </nav>
           <button className="theme-toggle" onClick={toggleTheme} title="Toggle theme">

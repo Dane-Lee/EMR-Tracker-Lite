@@ -84,7 +84,6 @@ export default function CoachingForm({ employees, onSave, editRecord, onCancel }
     <form className="coaching-form" onSubmit={handleSubmit}>
       <div className="form-header">
         <h2>{editRecord ? 'Edit Coaching Encounter' : 'New Coaching Encounter'}</h2>
-        <span className="clinician-tag">Lee, Dane · Early Intervention Specialist I</span>
       </div>
 
       <section className="form-section">

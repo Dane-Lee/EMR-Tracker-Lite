@@ -496,6 +496,14 @@ body {
 
 .close-btn:hover { background: var(--bg-hover); }
 
+/* Manage Employees close button — larger and more visible */
+.modal-header .close-btn {
+  font-size: 1.7rem;
+  color: var(--text-secondary);
+  padding: 4px 12px;
+  line-height: 1;
+}
+
 /* ── Employee Manager ── */
 .employee-form {
   padding: 22px 28px;
@@ -883,5 +891,13 @@ body {
   /* ─── Phase 4: comfortable touch targets ─── */
   .btn-sm { padding: 10px 16px; }
   .close-btn { min-width: 44px; min-height: 44px; }
+  .modal-header .close-btn {
+    min-width: 52px;
+    min-height: 52px;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .btn-template-toggle { padding: 9px 14px; }
 }
