@@ -23,6 +23,7 @@ export default function CoachingForm({ employees, onSave, editRecord, onCancel }
     whatPrompted: editRecord.whatPrompted || '',
   } : BLANK_FORM);
   const [showTemplates, setShowTemplates] = useState(false);
+  const [error, setError] = useState('');
   const descRef = useRef(null);
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
@@ -67,8 +68,10 @@ export default function CoachingForm({ employees, onSave, editRecord, onCancel }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!employeeId || !form.coachingType) return;
-    if (selectedType?.hasWhatPrompted && !form.whatPrompted) return;
+    if (!employeeId) { setError('Please select an employee from the dropdown list.'); return; }
+    if (!form.coachingType) { setError('Please choose a coaching type.'); return; }
+    if (selectedType?.hasWhatPrompted && !form.whatPrompted) { setError('Please select what prompted the coaching.'); return; }
+    setError('');
 
     onSave({
       id: editRecord?.id || Date.now().toString(),
@@ -188,6 +191,7 @@ export default function CoachingForm({ employees, onSave, editRecord, onCancel }
       <div className="form-actions">
         <button type="submit" className="btn-primary">Save Encounter</button>
         <button type="button" className="btn-ghost" onClick={onCancel}>Cancel</button>
+        {error && <span className="form-error">{error}</span>}
       </div>
     </form>
   );

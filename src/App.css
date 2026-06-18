@@ -324,7 +324,13 @@ body {
 }
 
 /* ── Form Actions ── */
-.form-actions { padding: 22px 28px; display: flex; gap: 12px; }
+.form-actions { padding: 22px 28px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+.form-error {
+  color: var(--danger);
+  font-size: .9rem;
+  font-weight: 600;
+}
 
 .btn-primary {
   background: var(--accent);

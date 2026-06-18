@@ -36,10 +36,19 @@ export default function EmployeeAutocomplete({ employees, value, onChange }) {
   };
 
   const handleInputChange = (e) => {
-    setQuery(e.target.value);
+    const v = e.target.value;
+    setQuery(v);
     setOpen(true);
     setActiveIdx(-1);
-    if (e.target.value === '') onChange('');
+    if (v.trim() === '') { onChange(''); return; }
+    // Auto-select when the typed text uniquely matches one employee,
+    // so a fully-typed name registers without tapping the dropdown.
+    const q = v.trim().toLowerCase();
+    const matches = employees.filter(emp =>
+      `${emp.lastName}, ${emp.firstName}`.toLowerCase() === q ||
+      `${emp.firstName} ${emp.lastName}`.toLowerCase() === q
+    );
+    onChange(matches.length === 1 ? matches[0].id : '');
   };
 
   const handleKeyDown = (e) => {
