@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import CoachingForm from './components/CoachingForm';
 import RecordsList from './components/RecordsList';
@@ -12,6 +12,8 @@ export default function App() {
   const [editRecord, setEditRecord] = useState(null);
   const [showEmployeeManager, setShowEmployeeManager] = useState(false);
   const [theme, setTheme] = useLocalStorage('ati-theme', 'dark');
+  const [toast, setToast] = useState('');
+  const toastTimer = useRef(null);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -19,14 +21,22 @@ export default function App() {
 
   const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
 
+  const showToast = (msg) => {
+    setToast(msg);
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    toastTimer.current = setTimeout(() => setToast(''), 2500);
+  };
+
   const handleSaveRecord = (record) => {
     if (editRecord) {
       setRecords(records.map(r => r.id === record.id ? record : r));
+      setEditRecord(null);
+      setView('records');
     } else {
+      // Stay on the form for the next entry; just confirm the save
       setRecords([record, ...records]);
+      showToast('✓ Encounter saved');
     }
-    setEditRecord(null);
-    setView('records');
   };
 
   const handleEdit = (record) => {
@@ -108,6 +118,8 @@ export default function App() {
           onClose={() => setShowEmployeeManager(false)}
         />
       )}
+
+      {toast && <div className="toast">{toast}</div>}
     </div>
   );
 }

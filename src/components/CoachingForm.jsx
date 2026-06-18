@@ -24,6 +24,7 @@ export default function CoachingForm({ employees, onSave, editRecord, onCancel }
   } : BLANK_FORM);
   const [showTemplates, setShowTemplates] = useState(false);
   const [error, setError] = useState('');
+  const [entryKey, setEntryKey] = useState(0);
   const descRef = useRef(null);
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
@@ -81,6 +82,15 @@ export default function CoachingForm({ employees, onSave, editRecord, onCancel }
       createdAt: editRecord?.createdAt || new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     });
+
+    // After a new encounter, reset the form for the next entry
+    if (!editRecord) {
+      setForm({ ...BLANK_FORM, date: today() });
+      setEmployeeId('');
+      setShowTemplates(false);
+      setEntryKey(k => k + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -95,6 +105,7 @@ export default function CoachingForm({ employees, onSave, editRecord, onCancel }
           <div className="field">
             <label>Employee *</label>
             <EmployeeAutocomplete
+              key={entryKey}
               employees={employees}
               value={employeeId}
               onChange={setEmployeeId}
